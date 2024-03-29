@@ -72,7 +72,7 @@ const BinaryFileReader: React.FC = () => {
 		const coldColor = { r: 0, g: 0, b: 255 }
 		const hotColor = { r: 255, g: 0, b: 0 }
 
-		const ratio = (temperature - 0) / (255 - 120)
+		const ratio = temperature / 110
 		const r = Math.round(coldColor.r + (hotColor.r - coldColor.r) * ratio)
 		const g = Math.round(coldColor.g + (hotColor.g - coldColor.g) * ratio)
 		const b = Math.round(coldColor.b + (hotColor.b - coldColor.b) * ratio)
