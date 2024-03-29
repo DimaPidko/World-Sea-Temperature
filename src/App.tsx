@@ -2,8 +2,8 @@ import React, { ChangeEvent, useState } from 'react'
 
 const BINARY_DIMENSION_X = 36000
 const DIMENSION_Y = 17999
-const CHUNK_SIZE = 90024 * 90024
-const RESIZE_FACTOR = 32
+const CHUNK_SIZE = 36000 * 17999
+const RESIZE_FACTOR = 16
 
 const BinaryFileReader: React.FC = () => {
 	const [isReading, setIsReading] = useState(false)
@@ -21,10 +21,7 @@ const BinaryFileReader: React.FC = () => {
 			try {
 				let currentPosition = 0
 				while (currentPosition < file.size) {
-					const blobChunk = file.slice(
-						currentPosition,
-						Math.min(currentPosition + CHUNK_SIZE, file.size)
-					)
+					const blobChunk = file.slice(currentPosition, CHUNK_SIZE)
 					const arrayBuffer = await blobToArrayBuffer(blobChunk)
 					drawImageData(context, arrayBuffer)
 					currentPosition += CHUNK_SIZE
@@ -53,10 +50,18 @@ const BinaryFileReader: React.FC = () => {
 				const pixelIndex = (y * BINARY_DIMENSION_X + x) * 1
 				const pixelData = data[pixelIndex]
 				const color = getSeaColor(pixelData)
-				imageData.data[finalIndex++] = color.r // R
-				imageData.data[finalIndex++] = color.g // G
-				imageData.data[finalIndex++] = color.b // B
-				imageData.data[finalIndex++] = 255 // Alpha
+
+				if (pixelData === 255) {
+					imageData.data[finalIndex++] = color.r // R
+					imageData.data[finalIndex++] = color.g // G
+					imageData.data[finalIndex++] = color.b // B
+					imageData.data[finalIndex++] = 0 // Alpha
+				} else {
+					imageData.data[finalIndex++] = color.r // R
+					imageData.data[finalIndex++] = color.g // G
+					imageData.data[finalIndex++] = color.b // B
+					imageData.data[finalIndex++] = 255 // Alpha
+				}
 			}
 		}
 
