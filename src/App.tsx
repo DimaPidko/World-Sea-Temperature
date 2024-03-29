@@ -103,7 +103,7 @@ const BinaryFileReader: React.FC = () => {
 			{isReading && <p>Reading file...</p>}
 			<div>
 				<img
-					src='./src/assets/empty-map.jpg'
+					src='https://moweb.azureedge.net/careers/heat-map-task/heat-map.jpg'
 					alt='emptyMap'
 					style={{
 						width: BINARY_DIMENSION_X / RESIZE_FACTOR,
