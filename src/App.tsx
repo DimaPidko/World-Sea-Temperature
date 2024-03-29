@@ -101,16 +101,18 @@ const BinaryFileReader: React.FC = () => {
 		<div style={{ display: 'flex', justifyContent: 'center' }}>
 			<input type='file' onChange={handleFileChange} disabled={isReading} />
 			{isReading && <p>Reading file...</p>}
-			<img
-				src='./src/assets/empty-map.jpg'
-				alt='emptyMap'
-				style={{
-					width: BINARY_DIMENSION_X / RESIZE_FACTOR,
-					height: DIMENSION_Y / RESIZE_FACTOR,
-					position: 'absolute',
-					left: '10%',
-				}}
-			/>
+			<div>
+				<img
+					src='./src/assets/empty-map.jpg'
+					alt='emptyMap'
+					style={{
+						width: BINARY_DIMENSION_X / RESIZE_FACTOR,
+						height: DIMENSION_Y / RESIZE_FACTOR,
+						position: 'absolute',
+						margin: 'auto',
+					}}
+				/>
+			</div>
 			<canvas
 				ref={canvasRef}
 				width={BINARY_DIMENSION_X / RESIZE_FACTOR}
