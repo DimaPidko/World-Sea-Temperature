@@ -52,9 +52,9 @@ const BinaryFileReader: React.FC = () => {
 				const color = getSeaColor(pixelData)
 
 				if (pixelData === 255) {
-					imageData.data[finalIndex++] = color.r // R
-					imageData.data[finalIndex++] = color.g // G
-					imageData.data[finalIndex++] = color.b // B
+					imageData.data[finalIndex++] = 0 // R
+					imageData.data[finalIndex++] = 0 // G
+					imageData.data[finalIndex++] = 0 // B
 					imageData.data[finalIndex++] = 0 // Alpha
 				} else {
 					imageData.data[finalIndex++] = color.r // R
@@ -101,6 +101,16 @@ const BinaryFileReader: React.FC = () => {
 		<div style={{ display: 'flex', justifyContent: 'center' }}>
 			<input type='file' onChange={handleFileChange} disabled={isReading} />
 			{isReading && <p>Reading file...</p>}
+			<img
+				src='./src/assets/empty-map.jpg'
+				alt='emptyMap'
+				style={{
+					width: BINARY_DIMENSION_X / RESIZE_FACTOR,
+					height: DIMENSION_Y / RESIZE_FACTOR,
+					position: 'absolute',
+					left: '10%',
+				}}
+			/>
 			<canvas
 				ref={canvasRef}
 				width={BINARY_DIMENSION_X / RESIZE_FACTOR}
